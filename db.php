@@ -9,8 +9,8 @@ $connection_options = [
     'Uid' => 'sa',
     'PWD' => 'YourPassword123',
     'CharacterSet' => 'UTF-8',
-    'Encrypt' => 1, // SSL obrigatório no ODBC Driver 18
-    'TrustServerCertificate' => 1 // ignora certificados inválidos
+    'Encrypt' => 1, //SSL obrigatório no ODBC Driver 18
+    'TrustServerCertificate' => 1 //ignora certificados inválidos
 ];
 
 $conn = sqlsrv_connect($server_name, $connection_options);
