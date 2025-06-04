@@ -4,11 +4,11 @@ API REST simples para simular transferências bancárias entre contas, com supor
 
 ## 🧱 Tecnologias
 
-- PHP 8.1 com Apache
-- SQL Server 2022
-- Docker & Docker Compose
-- NGINX como balanceador de carga
-- PDO + SQLSRV para acesso ao banco
+- PHP 8.1 com Apache;
+- SQL Server 2022;
+- Docker & Docker Compose;
+- NGINX como balanceador de carga;
+- PDO + SQLSRV para acesso ao banco;
 
 ---
 
@@ -49,10 +49,26 @@ No diretório raiz do projeto, executar:
 ```bash
 docker compose up --build -d
 ```
-### 3. Inicializar o banco
+
+### 3. Verificar se a API está online
+
+```curl
+curl http://localhost:8080/
+```
+
+**Resposta esperada:**
+```json
+{
+  "mensagem": "PHP carregado com sucesso!",
+  "info": "API de Transferência - Acesse /transferir para realizar uma transferência ou execute o teste de estresse."
+}
+```
+
+### 4. Inicializar o banco
 ```bash
 docker exec -it php1 php database/setup_db.php
 ```
+
 Contas de teste
 | ID | Nome           | Saldo inicial |
 |----|----------------|---------------|
@@ -60,11 +76,13 @@ Contas de teste
 | 2  | João Pereira   | R$ 1500,00    |
 | 3  | Maria Oliveira | R$ 2000,00    |
 | 4  | Ana Souza      | R$ 1200,00    |
-### 4. Testar conexão com o banco
+
+### 5. Testar conexão com o banco
 ```bash
 docker exec -it php1 php database/test_connection.php
 ```
-### 5. Teste de transação única
+
+### 6. Teste de transação única
 #### Endpoint: POST /transfer.php  
 Realiza uma transferência entre contas.
 ```bash
@@ -81,22 +99,22 @@ Erros comuns:
 - Dados inválidos
 ```
 
-### 5. Teste de carga
+### 7. Teste de carga
 Para simular concorrência:
 ``` bash
 docker exec -it php1 php tests/stress_test.php
 ```
 
-## Segurança
+## 🔒 Segurança
 - As queries são parametrizadas para evitar SQL Injection, enviando as variáveis por referência;
 - Transações com locking (UPDLOCK, ROWLOCK) para evitar concorrência e deadlocks;
 
-## Observações e detalhes
+## 📌 Observações e detalhes
 - Este projeto não usa frameworks, tudo é feito via PHP puro;
 - O campo de valor foi criado em DECIMAL, pois FLOAT pode gerar inconsistências;
 - Projeto está estruturado de forma stateless na camada da API e do load balancer. O estado fica centralizado no banco de dados, o que facilita escalabilidade horizontal (pode-se rodar quantos containers PHP quiser) e resiliência, porque não depende de sessão no servidor;
 - Comportamento round-robin, típico do NGINX para balanceamento simples;
 - Utilizando imagem oficial da Microsoft pra SQL Server e imagem PHP 8.1 com Apache;
 
-## Autor
+## 🧑‍💻 Autor
 Desenvolvido por [Raphael](https://www.linkedin.com/in/raphael-deodato/).
