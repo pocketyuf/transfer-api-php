@@ -16,3 +16,10 @@ CREATE TABLE transacoes (
     FOREIGN KEY (conta_origem_id) REFERENCES contas(id),
     FOREIGN KEY (conta_destino_id) REFERENCES contas(id)
 );
+
+-- exemplos de registros pra testes
+INSERT INTO contas (nome, saldo) VALUES
+    ('Carlos Silva', 1000.00),
+    ('João Pereira', 1500.00),
+    ('Maria Oliveira', 2000.00),
+    ('Ana Souza', 1200.00);

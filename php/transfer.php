@@ -2,7 +2,13 @@
 // transfer.php
 // endpoint para transferência de valores entre contas com validação e transação segura
 
-require 'db.php';
+require 'database/sql_server.php';
+
+if (!$conn) {
+    http_response_code(500);
+    echo json_encode(["erro" => "Conexão ao banco falhou"]);
+    exit;
+}
 
 $ambiente = 'dev'; // mudar para 'prod' ao subir ou puxar de arquivo de ambiente (.env)
 

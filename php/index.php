@@ -7,8 +7,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 header('Content-Type: application/json');
 
-if ($uri === '/transferir' && $method === 'POST') {
+if($uri === '/transferir' && $method === 'POST')
     require 'transfer.php';
-} else {
-    echo json_encode(["erro" => "Rota inválida"]);
-}
+else
+    echo json_encode(['erro' => 'Rota inválida']);
