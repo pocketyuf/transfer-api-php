@@ -116,5 +116,16 @@ docker exec -it php1 php tests/stress_test.php
 - Comportamento round-robin, típico do NGINX para balanceamento simples;
 - Utilizando imagem oficial da Microsoft pra SQL Server e imagem PHP 8.1 com Apache;
 
+## ✅ Próximos Passos (opcional)
+Este projeto foi estruturado com foco em simplicidade, clareza e testes de concorrência para uma API de transferência bancária com PHP puro. A seguir, estão algumas melhorias possíveis:
+
+### 🔐 Adicionar suporte a .env
+Externalizar configurações sensíveis como senhas e parâmetros de conexão via dotenv para maior segurança e flexibilidade de ambiente.
+
+### 🧱 Refatorar para POO (Programação Orientada a Objetos)
+Modularizar a lógica da aplicação em classes reutilizáveis para melhorar manutenibilidade, testes e escalabilidade futura da API.
+
+Essas etapas não foram incluídas inicialmente para manter a agilidade na conclusão e o foco no objetivo técnico principal: garantir segurança e concorrência nas transações bancárias, além de distribuição com Docker + NGINX. As melhorias acima estão mapeadas e podem ser aplicadas rapidamente caso necessário.
+
 ## 🧑‍💻 Autor
-Desenvolvido por [Raphael](https://www.linkedin.com/in/raphael-deodato/).
+Desenvolvido por [Raphael](https://www.linkedin.com/in/raphael-deodato/) para manter a prática e fluência em desenvolvimento backend com PHP e SQL Server.
