@@ -6,25 +6,21 @@ $connectionOptions = [
     'Database' => 'TesteTransferencia'
 ];
 
-// Conecta ao banco
+//conecta ao banco
 $conn = sqlsrv_connect($serverName, $connectionOptions);
-if ($conn === false) {
+if($conn === false)
     die(print_r(sqlsrv_errors(), true));
-}
 
-// Consulta a conta com id 1
-$sql = "SELECT * FROM contas WHERE id in (1,2)";
+//consulta todas as contas
+$sql = "SELECT id, nome, saldo FROM contas";
 $stmt = sqlsrv_query($conn, $sql);
 
 if($stmt === false)
     die(print_r(sqlsrv_errors(), true));
 
-$row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-if ($row === null)
-    echo "Conta 1 não encontrada\n";
-else {
-    echo "Conta 1 encontrada:\n";
-    print_r($row);
+echo 'Lista de contas:' . PHP_EOL;
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+    echo "ID: {$row['id']} | Nome: {$row['nome']} | Saldo: R$ " . number_format($row['saldo'], 2, ',', '.') . PHP_EOL;
 }
 
 sqlsrv_close($conn);

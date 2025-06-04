@@ -7,7 +7,22 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 header('Content-Type: application/json');
 
-if($uri === '/transferir' && $method === 'POST')
-    require 'transfer.php';
-else
+$routes = [
+    'GET' => ['/' => function() {
+            echo json_encode([
+                'mensagem' => 'PHP carregado com sucesso!',
+                'info' => 'API de Transferência - Acesse /transferir para realizar uma transferência ou execute o teste de estresse.'
+            ]);
+        },
+    ], 'POST' => ['/transfer' => function() {
+            require 'transfer.php';
+        }
+    ]
+];
+
+if(isset($routes[$method][$uri]))
+    $routes[$method][$uri]();
+else {
+    http_response_code(404);
     echo json_encode(['erro' => 'Rota inválida']);
+}
